@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app/app';
-import Api from "./API/Api";
-
+import App from './App';
 
 
 
@@ -10,7 +8,7 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('d1')
+  document.getElementById('root')
 );
 
 

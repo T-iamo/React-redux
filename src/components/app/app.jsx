@@ -1,6 +1,8 @@
 import React,{ Component } from "react";
 import CommentAdd from "../comment-add/comment-add";
 import CommentList from "../comment-list/comment-list";
+import Api from "../../API/Api";
+import './app.css'
 export default class App extends Component{
     //初始化状态
     constructor(props) {
@@ -12,29 +14,42 @@ export default class App extends Component{
             ]
         }
     }
+    //添加评论
     addComment = (comment) => {
         const {comments} = this.state
         comments.unshift(comment)
         //更新状态
-        this.setState({comment})
+        this.setState({comments})
+    }
+    //删除指定评论
+    deleteComment = (index) => {
+        const {comments} = this.state
+        comments.splice(index,1)
+        //更新状态
+        this.setState({comments})
     }
     render() {
         //可以事先定义一下
         const {comments} = this.state
         return (
-                <div>
+                <div className="solo">
                     <header className="site-header jumbotron">
-                        <div className="container">
+                        <div className="containers">
                             <div className="row">
                                 <div className="col-xs-12">
-                                    <h1>请发表对React的评论</h1>
+                                    <h1 style={{textAlign:'center'}}>请发表对React的评论</h1>
                                 </div>
                             </div>
                         </div>
                     </header>
                     <div className="container">
-                        <CommentAdd addComment = {this.addComment}/>
-                        <CommentList comments = {comments}/>
+                        <CommentAdd
+                            addComment = {this.addComment}
+                        />
+                        <CommentList
+                            comments = {comments}
+                            deleteComment={this.deleteComment}
+                        />
                         {/*下面是拆分部分*/}
                         {/*将这两个部分拆分出去
                             <div className="col-md-4">
@@ -76,6 +91,7 @@ export default class App extends Component{
                         </div>
                         */}
                     </div>
+                    {<Api />}
                 </div>
         )
     }
